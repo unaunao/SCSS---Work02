@@ -1,0 +1,217 @@
+/* Google Web Font */
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,400,500,700,900&display=swap');
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,500&display=swap');
+
+// Map-get Array Parameter
+// 하나의 변수에 여러개의 인자를 넣고 편하게 쓸 수 있다.
+// $font-family: (
+//   인자: 값,
+//   인자: 값,
+//   인자: 값
+// );
+
+// variables 
+$font-family: (
+  kor:'Noto Sans KR',
+  eng:'Montserrat'
+);
+$font-color: (
+  primary: #222,
+  secondary: #555
+);
+$font-size: (
+  base: 15px,
+  large-heading: 60px,
+  medium-heading: 45px,
+  small-heading: 20px
+);
+$bg-color: (
+  primary: #fff,
+  secondary: #f8f8f8
+);
+$btn-color: (
+  pc: crimson,
+  mobile: royalblue
+);
+
+// Mixin
+@mixin wavy-underline {
+  text-decoration-style: wavy;
+  text-decoration-color: #e84393;
+  text-decoration-line: underline;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 15px;
+}
+@mixin btn-base {
+  color: #fff;
+  font-size: 10px;
+  border-radius: 3px;
+  padding: 2px 8px;
+  text-transform: uppercase;
+}
+
+/* Custom Reset CSS */
+// html이 기본적으로 제공하는 것을 리셋함, 내가 원하는대로 커스텀해서 리세팅한다
+* {
+  box-sizing: border-box;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+button, input {
+  outline: none;
+}
+button {
+  cursor: pointer;
+}
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.2em;
+  margin-top: 0;
+  font-weight: normal;
+}
+
+/* Default CSS */
+body {
+  font-family: map-get($font-family, kor), sans-serif;
+  color: map-get($font-color, primary);
+  font-size: map-get($font-size, base);
+  font-weight: 300;
+  line-height: 1.5em;
+  margin: 0;
+  background-color: map-get($bg-color, primary);
+}
+
+/* Section : Portfolio */
+.portfilio {
+  height: 100vh;
+  background: url(images/background.png) no-repeat top center;
+  display: grid;
+  justify-content: center;
+  // 자식요소가 2개 이상 될때 align-items:center 말고 align-content: center;를 사용해야지만 사이 간격 없이 중앙으로 모을 수 있다.
+  align-content: center;
+  .headline-share {
+    margin-bottom: 50px;
+    h1 {
+      @include wavy-underline;
+      font-family: map-get($font-family, eng);
+      font-size: map-get($font-size, large-heading);
+      text-transform: uppercase;
+      text-align: center;
+    }
+  }
+  .items {
+    width: 1280px;
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 30px;
+    .item {
+      &.thum {
+        .photo {
+          box-shadow: 0 15px 45px rgba(0, 0, 0, 0.15);
+          border-radius: 15px;
+          width: 100%;
+          height: 400px;
+          overflow: hidden;
+          img {
+            width: inherit;
+            height: inherit;
+            object-fit: cover;
+            object-position: top;
+            transition: 2s;
+          }
+        }
+        &:hover img{
+          object-position: bottom;
+        }
+        .portfolio-title {
+          font-family: map-get($font-family, eng);
+          display: block;
+          text-align: center;
+          margin: 7px;
+          .btn-view {
+            @include btn-base;
+            &.pc {
+              background-color: map-get($btn-color, pc);
+            }
+            &.mobile{
+              background-color: map-get($btn-color, mobile);
+            }
+          }
+        }
+      }
+    }
+    aside.item {
+      b, h2 {
+        font-family: map-get($font-family, eng);
+      }
+      b {
+        font-weight: normal;
+        color: crimson;
+      }
+      h2 {
+        font-size: 1.6em;
+        margin-top: 15px;
+      }
+      .portfolio-info {
+        padding-left: 20px;
+        line-height: 1.7em;
+        span {
+          display: list-item;
+        }
+      }
+    }
+  }
+}
+
+// 중요!! 미디어쿼리 할때 기존 선택자 양식을 유지해야 한다!!! 
+
+/* Tablet Breakpoint */
+@media (min-width: 768px) and (max-width: 1024px){
+  .portfilio {
+    // 태블릿으로 가면서 세로가 길어지기 때문에 auto로 리셋 작업을 하는 것임
+    height: auto;
+    padding: 20px;
+    // start로 바꾸는 이유 길어지면서 가로 정렬이 중앙으로 가면 안되니까
+    // 위를 기준으로 처음부터 배치돼!
+    align-content: start;
+    .headline-share {
+      h1 {
+        font-size: map-get($font-size, medium-heading);
+      }
+    }
+    .items {
+      width: 100%;
+      grid-template-columns: repeat(2, 1fr);
+      aside.item {
+        grid-column: span 2;
+      }
+      .item {
+        // :nth-of-type()앞에 놓여진 선택자를 적확하게 구분해서 순서를 정함
+        // :nth-child()앞에 선택자 구분없이 형제선상의 태그 순서대로 정함
+        &.thum:nth-of-type(3) {
+          grid-column: span 2;
+        }}
+    }
+  }
+}
+
+/* Mobile Breakpoint */
+@media (max-width: 768px) {
+  .portfilio{
+    height: auto;
+    padding: 20px;
+    align-content: start;
+    .headline-share {
+      h1 {
+        font-size: map-get($font-size, small-heading);
+      }
+    }
+    .items {
+      width: 100%;
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+}
