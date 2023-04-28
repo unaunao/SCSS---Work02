@@ -1,76 +1,13 @@
+
 /* Google Web Font */
 @import url('https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,400,500,700,900&display=swap');
 
 @import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,500&display=swap');
 
-// Map-get Array Parameter
-// 하나의 변수에 여러개의 인자를 넣고 편하게 쓸 수 있다.
-// $font-family: (
-//   인자: 값,
-//   인자: 값,
-//   인자: 값
-// );
+@import "reset";
+@import "mixins";
+@import "map-get-array";
 
-// variables 
-$font-family: (
-  kor:'Noto Sans KR',
-  eng:'Montserrat'
-);
-$font-color: (
-  primary: #222,
-  secondary: #555
-);
-$font-size: (
-  base: 15px,
-  large-heading: 60px,
-  medium-heading: 45px,
-  small-heading: 20px
-);
-$bg-color: (
-  primary: #fff,
-  secondary: #f8f8f8
-);
-$btn-color: (
-  pc: crimson,
-  mobile: royalblue
-);
-
-// Mixin
-@mixin wavy-underline {
-  text-decoration-style: wavy;
-  text-decoration-color: #e84393;
-  text-decoration-line: underline;
-  text-decoration-thickness: 3px;
-  text-underline-offset: 15px;
-}
-@mixin btn-base {
-  color: #fff;
-  font-size: 10px;
-  border-radius: 3px;
-  padding: 2px 8px;
-  text-transform: uppercase;
-}
-
-/* Custom Reset CSS */
-// html이 기본적으로 제공하는 것을 리셋함, 내가 원하는대로 커스텀해서 리세팅한다
-* {
-  box-sizing: border-box;
-}
-a {
-  text-decoration: none;
-  color: inherit;
-}
-button, input {
-  outline: none;
-}
-button {
-  cursor: pointer;
-}
-h1, h2, h3, h4, h5, h6 {
-  line-height: 1.2em;
-  margin-top: 0;
-  font-weight: normal;
-}
 
 /* Default CSS */
 body {

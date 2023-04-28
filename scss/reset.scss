@@ -1,0 +1,20 @@
+// Custom Reset CSS
+// html이 기본적으로 제공하는 것을 리셋함, 내가 원하는대로 커스텀해서 리세팅한다
+* {
+  box-sizing: border-box;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+button, input {
+  outline: none;
+}
+button {
+  cursor: pointer;
+}
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.2em;
+  margin-top: 0;
+  font-weight: normal;
+}
